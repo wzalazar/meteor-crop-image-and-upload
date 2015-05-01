@@ -1,6 +1,7 @@
  var getResult = function(e) {
-     var dataURL = this.reader.result;
-     this.template.$('.image-cropper').cropit('imageSrc', dataURL);
+ 	 /* Return Base 64 */
+     var b64 = this.reader.result;
+     this.template.$('.image-cropper').cropit('imageSrc', b64);
  }
 
  var handleFileSelect = function(evt) {
@@ -29,7 +30,6 @@
 						quality: .9,
 						originalSize: true
 				   });
-		console.log(originFile.name);
 
 		if (b64){
 			
