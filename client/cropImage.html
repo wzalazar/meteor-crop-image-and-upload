@@ -1,0 +1,42 @@
+<template name="formCropImage">
+	<div class="col-md-12">
+	<div class="wrapper">
+	    <form id="upload" class="form-inline">
+	        {{> uploadCropImage}}
+	        {{> uploadCropImage}}
+            <button class="btn btn-primary">Enviar</button>
+	    </form>
+    </div>
+    </div>
+</template>
+
+<template name="uploadCropImage">
+	<div class="form-group">
+	    <div class="image-cropper">
+	        <div class="cropit-image-preview"></div>
+	        <div class="slider-wrapper">
+		        <span class="fa fa-file-image-o left"></span>
+		        <input type="range" class="cropit-image-zoom-input custom" />
+		        <span class="fa fa-file-image-o right"></span>
+	        </div>
+	    </div>
+	    <input type="hidden" class="origin-file-hidden">
+	    <input class="image" type="file" />
+	</div>
+</template>
+
+
+<template name="viewCropImages">
+	<div class="row viewCropImages">
+		{{#each images}}
+			<div class="col-md-3 crop-image">
+				<a href="{{getPathAbsImageCfs this.url}}" target="_blank"><img src="{{getPathAbsImageCfs this.url}}" alt="" class="thumbnail" /></a>
+				<p><strong>Name:</strong> {{this.name}}</p>
+				<p><strong>Extension:</strong> {{this.extension}}</p>
+				<p><strong>Type:</strong> {{this.type}}</p>
+				<p><strong>Size:</strong> {{this.size}}</p>
+				{{#FS.DeleteButton class="btn btn-danger btn-xs"}}Delete Me{{/FS.DeleteButton}}
+			</div>
+		{{/each}}
+	</div>
+</template>
