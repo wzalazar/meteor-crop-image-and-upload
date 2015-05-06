@@ -4,16 +4,35 @@
 
 <body>
 <div class="container">
-	<div class="row">
-		<h1>Crop Image and Save</h1>
-		<p>The files are read like <strong>Blob</strong>, after that submit are <strong>saved</strong> like Blob inside of the <strong>Collection</strong>.</p>
+<div class="row">
+	<h1>Crop Image and Save</h1>
+	<p>The files are read like <strong>Blob</strong>, after that submit are <strong>saved</strong> like Blob inside of the <strong>Collection</strong>.</p>
+</div>
+<div class="row">
+	<div role="tabpanel">
+
+	  <!-- Nav tabs -->
+	  <ul class="nav nav-tabs" role="tablist">
+	    <li role="presentation" class="active"><a href="#local"  role="tab" data-toggle="tab">Local</a></li>
+	    <li role="presentation"><a href="#pixabay" role="tab" data-toggle="tab">Pixabay</a></li>
+	  </ul>
+
+	  <!-- Tab panes -->
+	  <div class="tab-content">
+	    <div role="tabpanel" class="tab-pane active" id="local">
+	    	{{> formCropImage}}
+	    </div>
+	    <div role="tabpanel" class="tab-pane" id="pixabay">
+	    	{{> pixabay}}
+	    </div>
+	  </div>
+
 	</div>
-	<div class="row">
-	  {{> formCropImage}}
-	</div>
-	<div class="row">
-	  {{> viewCropImages}}
-	</div>
+</div>
+<div>
+	{{> viewCropImages}}
+</div>
+	
 </div>
 </body>
 
