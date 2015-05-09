@@ -1,0 +1,14 @@
+<template name="viewCropImages">
+	<div class="row viewCropImages">
+		{{#each images}}
+			<div class="col-md-3 crop-image">
+				<a href="{{getPathAbsImageCfs this.url}}" target="_blank"><img src="{{getPathAbsImageCfs this.url}}" alt="" class="thumbnail" /></a>
+				<p><strong>Name:</strong> {{this.name}}</p>
+				<p><strong>Extension:</strong> {{this.extension}}</p>
+				<p><strong>Type:</strong> {{this.type}}</p>
+				<p><strong>Size:</strong> {{this.size}}</p>
+				{{#FS.DeleteButton class="btn btn-danger btn-xs"}}Delete Me{{/FS.DeleteButton}}
+			</div>
+		{{/each}}
+	</div>
+</template>

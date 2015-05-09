@@ -1,0 +1,23 @@
+<template name="galleryService">
+<div>
+	Busque sus imagenes a traves del <strong> servicio de galeria.</strong> Ingrese tags especificos, por ejemplo: <strong>home, gym, etc.</strong>
+</div>
+<div>
+	<form class="form-inline">
+	  <input class="tags" type="text" value="" data-role="tagsinput" />
+	  <button type="submit" class="btn btn-primary search-gallery">Search gallery</button>
+	</form>
+</div>
+<div id="gallery">
+	{{#each images}}
+		<div class="crop-image">
+			<img placeholder="Tags" class="select-image thumbnail" src="{{webformatURL}}" />
+		</div>
+	{{/each}}
+</div>
+<div>
+{{#unless images}}
+	<h3 class="center">No hay resultados.</h3>
+{{/unless}}
+</div>
+</template>

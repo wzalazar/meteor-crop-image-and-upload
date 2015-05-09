@@ -1,4 +1,7 @@
 ajduke:bootstrap-tagsinput@0.6.0
+aldeed:autoform@5.1.2
+aldeed:collection2@2.3.1
+aldeed:simple-schema@1.1.0
 autopublish@1.0.3
 autoupdate@1.2.1
 base64@1.0.3
@@ -50,6 +53,7 @@ minifiers@1.1.5
 minimongo@1.0.8
 mizzao:bootstrap-3@3.3.1_1
 mobile-status-bar@1.0.3
+momentjs:moment@2.8.4
 mongo@1.1.0
 mongo-livedata@1.0.8
 observe-sequence@1.0.6
@@ -73,3 +77,4 @@ underscore@1.0.3
 url@1.0.4
 webapp@1.2.0
 webapp-hashing@1.0.3
+wzalazar:autoform-crop-image@1.0.0

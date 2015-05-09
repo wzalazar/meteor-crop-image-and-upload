@@ -1,0 +1,24 @@
+<template name="afCropImage">
+<div class="afCropImage">
+	<div role="tabpanel">
+
+	  <!-- Nav tabs -->
+	  <ul class="nav nav-tabs" role="tablist">
+	    <li role="presentation" class="active"><a href="#local"  role="tab" data-toggle="tab">Local</a></li>
+	    <li role="presentation"><a href="#pixabay" role="tab" data-toggle="tab">Gallery service</a></li>
+	  </ul>
+
+	  <!-- Tab panes -->
+	  <div class="tab-content">
+	    <div role="tabpanel" class="tab-pane active" id="local">
+	    </div>
+	    <div role="tabpanel" class="tab-pane" id="pixabay">
+	    	{{> galleryService}}
+	    </div>
+	  </div>
+	  <div>
+		{{> uploadCropImage width=this.atts.width height=this.atts.height}}
+	  </div>
+	</div>
+</div>
+</template>

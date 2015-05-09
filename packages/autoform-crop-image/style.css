@@ -1,33 +1,29 @@
-.wrapper{
+.afCropImage .wrapper{
 	margin-top: 60px;
 }
 
-.slider-wrapper {
+.afCropImage .slider-wrapper {
     margin: 20px 0px 60px 0px;
     text-align: center;
     position: relative;
     width: 250px;
 }
 
-.form-group{
-	margin-left: 30px;
-}
-
-.slider-wrapper .left {
+.afCropImage .slider-wrapper .left {
     position: absolute;
     left: 0px;
     top: -4px;
     font-size: 17px;
 }
 
-.slider-wrapper .right {
+.afCropImage .slider-wrapper .right {
     position: absolute;
     top: -11px;
     right: 0px;
 	font-size: 25px;
 }
 
-.cropit-image-preview {
+.afCropImage .cropit-image-preview {
     background-color: #f8f8f8;
     background-size: cover;
     border: 1px solid #ccc;
@@ -38,17 +34,17 @@
     cursor: move;
 }
 
-.cropit-image-zoom-input {
+.afCropImage .cropit-image-zoom-input {
     width: 70%!important;
     margin: 0 auto;
 }
 
-.cropit-image-background {
+.afCropImage .cropit-image-background {
     opacity: .2;
     cursor: auto;
 }
 
-.cropit-image-zoom-input.custom {
+.afCropImage .cropit-image-zoom-input.custom {
     -webkit-appearance: none;
     -moz-appearance: none;
     appearance: none;
@@ -59,48 +55,35 @@
     outline: none;
 }
 
-.image-size-label {
+.afCropImage .image-size-label {
     margin-top: 10px;
 }
 
-input {
-    display: block;
-}
-
-.export {
-    margin-top: 10px;
-}
-
-.thumbnail {
-    max-width: 250px;
-    height: auto;
-}
-
-.viewCropImages {
-    margin: 60px 0px 60px 0px;
-}
-
-.crop-image{
-	margin-bottom: 60px;
-}
-
-.bootstrap-tagsinput{
+.afCropImage .bootstrap-tagsinput{
     width: 100%!important;
-    margin: 60px 0px 30px 0px;
 }
 
-.center{
+.afCropImage .center{
     text-align: center;
 }
 
-.search-gallery{
+.afCropImage .search-gallery{
     margin-bottom: 30px;
 }
 
-.tabpanel{
-    margin-top: 40px;
+.afCropImage #gallery{
+    margin-bottom: 30px;
 }
 
-h1{
-    margin-top: 65px;
+.afCropImage .nav-tabs{
+    margin: 40px 0px 40px 0px;
 }
+
+.afCropImage .image{
+    margin-bottom: 60px;
+}
+
+.afCropImage .bootstrap-tagsinput{
+    margin-top: 20px;
+}
+
