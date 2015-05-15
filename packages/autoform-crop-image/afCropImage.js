@@ -1,6 +1,6 @@
-showImage = function(){
-	
-}
+Meteor.startup(function () {
+	fields = new ReactiveArray();
+})
 
 AutoForm.addInputType("crop-image", {
   template: "afCropImage",
@@ -17,15 +17,15 @@ AutoForm.addInputType("crop-image", {
   },
   contextAdjust: function (context) {
   	if (Meteor.isClient){
-  		fieldName = new ReactiveVar();
-  		fieldName.set(context.name);
-	  	
-	  	if (!photoId){
-	  		photoId = new ReactiveVar();
-	  	}
 
-  		if (context.value && photoId.get()!== ""){
-	  		photoId.set(context.value);
+  		if (context.value){
+
+	  		if ( !_.where(fields, {'name':context.name,'value':context.value} ).length )
+	  		{
+	  			 context.atts.value = context.value;
+	  			 fields.push({'name':context.name,'value':context.value,'id':context.atts.id});
+	  		}
+
   		}
   	} 
   	return context;
@@ -34,10 +34,6 @@ AutoForm.addInputType("crop-image", {
 });
 
 if (Meteor.isClient) {
-
-
-	
-	
 
 	Template.afCropImage.events({
 		'click .select-image': function(event,template){
@@ -80,19 +76,9 @@ if (Meteor.isClient) {
 		}
 
 
-		$(this.find('.tags')).tagsinput('refresh');
-
-		Tracker.autorun(function(){
-			image = Images.findOne(photoId.get());
-			imageId = new ReactiveVar();
-			if (image){
-	  			imageId.set(image._id);
-				plugin.showImageInCropByUrl($('.image-cropper')[0],window.location.origin + "" +image.url());
-			}
+		$(this.find('.tags')).each(function(){
+			$(this).tagsinput('refresh');
 		})
-	
-
-		
 	});
 
 	function addAFHook(formId) {
@@ -100,16 +86,39 @@ if (Meteor.isClient) {
 		  before: {
 		    insert: function(doc){
 		    	var _this = this;
-		    	saveCropImage(this.template, function(idImage){
-			    	doc[fieldName.get()] = idImage;
-	                _this.result(doc);
+		    	var _doc = doc;
+
+		    	async.each(fields,function(field,callback){
+			    	saveCropImage(field.value, _this.template, function(idImage){
+			    		_doc.$set[field.name] = idImage;
+			    		callback();
+			    	});
+		    	}, function(err){
+		    		if (err){
+		    		}
+		    		else{
+			         	_this.result(_doc);
+			         	fields = [];
+		    		}
 		    	});
 		    },
 		    update: function(doc){
 		    	var _this = this;
-		    	updateCropImage(imageId.get(), this.template, function(idImage){
-		    		doc.$set[fieldName.get()] = idImage;
-	                _this.result(doc);
+		    	var _doc = doc;
+
+		    	async.each(fields,function(field,callback){
+			    	updateCropImage(field.value, _this.template, function(idImage){
+			    		_doc.$set[field.name] = idImage;
+			    		callback();
+			    	});
+		    	}, function(err){
+		    		if (err){
+		    		}
+		    		else{
+			         	_this.result(_doc);
+			         	fields = [];
+			         	Session.set('resultServiceGallery',[]);
+		    		}
 		    	});
 		    }
 		  }

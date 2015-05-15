@@ -18,12 +18,15 @@ Package.onUse(function(api) {
   api.use('ajduke:bootstrap-tagsinput');
   api.use('micah:justified-gallery');
   api.use('aldeed:collection2');
+  api.use('suxez:jquery-cropit');
+  api.use('peerlibrary:async');
+  api.use('manuel:reactivearray');
   api.addFiles([
     'afCropImage.html',
     'afCropImage.js',
     'style.css',
-    'crop/crop.html',
-    'crop/crop.js',
+    'uploadCropImage/uploadCropImage.html',
+    'uploadCropImage/uploadCropImage.js',
     'galleryService/galleryService.html',
     'galleryService/galleryService.js',
     'lib/api/pixabay.js',

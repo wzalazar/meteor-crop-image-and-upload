@@ -10,7 +10,11 @@ searchGallery = function(tags){
 	 		console.log(error);
 	 		return;
 	 	}
-	 	justifiedGallery();
-	 	gallery.set(result.data.hits);
+	 	Session.set('resultServiceGallery',result.data.hits);
+	 	Meteor.setTimeout(function(){
+	 		justifiedGallery();
+	 		$('.gallery').show();
+	 	},100);
+
 	});
 }

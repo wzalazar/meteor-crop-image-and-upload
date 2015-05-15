@@ -4,7 +4,7 @@ Template.galleryService.onCreated(function(){
 
 Template.galleryService.helpers({
 	'images': function(){
-		return gallery.get();
+		return Session.get('resultServiceGallery'); 
 	}
 })
 

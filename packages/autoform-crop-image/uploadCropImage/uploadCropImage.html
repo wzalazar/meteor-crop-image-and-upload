@@ -1,7 +1,7 @@
 <template name="uploadCropImage">
     <div class="form-group">
-        <div class="image-cropper">
-            <div class="cropit-image-preview"></div>
+        <div id="{{value}}" class="image-cropper">
+            <div class="cropit-image-preview cropit-image-loaded" style="width: {{width}}px; height: {{height}}px; background-image: url({{url}}); background-size: {{width}}px {{height}}px; background-position: 0px 0px; background-repeat: no-repeat;"></div>
             <div class="slider-wrapper">
                 <span class="fa fa-file-image-o left"></span>
                 <input type="range" class="cropit-image-zoom-input custom" />

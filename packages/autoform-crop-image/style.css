@@ -71,8 +71,9 @@
     margin-bottom: 30px;
 }
 
-.afCropImage #gallery{
+.afCropImage .gallery{
     margin-bottom: 30px;
+    display: none;
 }
 
 .afCropImage .nav-tabs{

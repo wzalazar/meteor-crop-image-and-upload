@@ -32,11 +32,10 @@ handleFileSelect = function(evt) {
   * Save image in Database
   * @param {Object} template - is the current template
   */
-saveCropImage = function(template,callback){
- 	$(template.$('.image-cropper')).each(function(){
+saveCropImage = function(idImage,template,callback){
 		var 
-			originFile= template.$('.origin-file-hidden').data("cfsaf_files"),
-		    b64 = plugin.exportToB64(this);
+			  originFile= template.$('.origin-file-hidden').data("cfsaf_files"),
+		    b64 = plugin.exportToB64($('#'+idImage));
 
 		if (b64){
 			
@@ -55,7 +54,7 @@ saveCropImage = function(template,callback){
     else{
       callback(undefined);
     }
-	});
+
  };
 
  /**
@@ -63,25 +62,24 @@ saveCropImage = function(template,callback){
   * @param {Object} template - is the current template
   */
 updateCropImage = function(idImage,template,callback){
-  $(template.$('.image-cropper')).each(function(){
 
     var 
       originFile= template.$('.origin-file-hidden').data("cfsaf_files"),
-      b64 = plugin.exportToB64(this);
+      b64 = plugin.exportToB64($('#'+idImage));
 
     if (idImage){
         if (b64){
             Images.remove({'_id':idImage});
-            saveCropImage(template,callback);
+            saveCropImage(idImage,template,callback);
         }
         else{
-          callback(undefined);
+          callback(idImage);
         }
     }
     else{
-      saveCropImage(template,callback);
+      saveCropImage(idImage,template,callback);
     }
-  });
+  
  };
 
 /**
@@ -100,7 +98,7 @@ convertImgToBase64 = function(url, callback, outputFormat){
       var ctx = canvas.getContext('2d');
       var img = new Image;
       img.crossOrigin = 'Anonymous';
-     img.onload = function(){
+      img.onload = function(){
              canvas.height = img.height;
              canvas.width = img.width;
              ctx.drawImage(img,0,0);
@@ -108,32 +106,34 @@ convertImgToBase64 = function(url, callback, outputFormat){
              callback.call(this, dataURL);
       // Clean up
              canvas = null; 
-     };
-     img.src = url;
+      };
+      img.src = url;
 }
 
 
 justifiedGallery = function(){
-    $('#gallery').justifiedGallery({
-    // option: default,
-    rowHeight: 120,
-    maxRowHeight: 0,
-    lastRow: 'nojustify',
-    fixedHeight: false,
-    captions: true,
-    margins: 1,
-    randomize: false,
-    extension: /.[^.]+$/,
-    refreshTime: 250,
-    waitThumbnailsLoad: true,
-    justifyThreshold: 0.35,
-    cssAnimation: false,
-    imagesAnimationDuration: 300
-  }).on('jg.complete', function (e) {
-    // this callback runs after the gallery layout is created
-  }).on('jg.resize', function (e) {
-    // this callback runs after the gallery is resized
-  }).on('jq.rowflush', function (e) {
-    // this callback runs when a new row is ready
-  });
+    $('.gallery').each(function(){
+        $(this).justifiedGallery({
+          // option: default,
+          rowHeight: 120,
+          maxRowHeight: 0,
+          lastRow: 'nojustify',
+          fixedHeight: false,
+          captions: true,
+          margins: 1,
+          randomize: false,
+          extension: /.[^.]+$/,
+          refreshTime: 250,
+          waitThumbnailsLoad: true,
+          justifyThreshold: 0.35,
+          cssAnimation: false,
+          imagesAnimationDuration: 300
+        }).on('jg.complete', function (e) {
+          // this callback runs after the gallery layout is created
+        }).on('jg.resize', function (e) {
+          // this callback runs after the gallery is resized
+        }).on('jq.rowflush', function (e) {
+          // this callback runs when a new row is ready
+        });
+    })
 }
