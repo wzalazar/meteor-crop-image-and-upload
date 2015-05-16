@@ -5,6 +5,7 @@ var configPixabay = {
 }
 
 searchGallery = function(tags){
+	Session.set('loadingPhotos',true);
 	HTTP.call('GET', configPixabay.url+'?username='+configPixabay.username+'&key='+configPixabay.key+'&q='+tags+'&image_type=photo', function(error, result){
 	 	if (error){
 	 		console.log(error);

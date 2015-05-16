@@ -88,3 +88,6 @@
     margin-top: 20px;
 }
 
+.afCropImage .select-image.thumbnail{
+    cursor: pointer;
+}

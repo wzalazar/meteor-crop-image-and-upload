@@ -1,0 +1,15 @@
+<template name="uploadCropImage">
+    <div class="form-group">
+        <div class="image-cropper">
+            <div class="cropit-image-preview"></div>
+            <div class="slider-wrapper">
+                <span class="fa fa-file-image-o left"></span>
+                <input type="range" class="cropit-image-zoom-input custom" />
+                <span class="fa fa-file-image-o right"></span>
+            </div>
+        </div>
+       
+        <input type="hidden" class="origin-file-hidden">
+        <input data-schema-key="{{this.dataSchemaKey}}" value="{{this.value}}" class="image" type="file" />
+    </div>
+</template>

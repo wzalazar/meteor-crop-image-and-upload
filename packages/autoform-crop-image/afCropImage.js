@@ -1,5 +1,5 @@
-Meteor.startup(function () {
-	fields = new ReactiveArray();
+Meteor.startup(function(){
+	renderUploadCropImage = new Tracker.Dependency;
 })
 
 AutoForm.addInputType("crop-image", {
@@ -16,18 +16,9 @@ AutoForm.addInputType("crop-image", {
     }
   },
   contextAdjust: function (context) {
-  	if (Meteor.isClient){
-
-  		if (context.value){
-
-	  		if ( !_.where(fields, {'name':context.name,'value':context.value} ).length )
-	  		{
-	  			 context.atts.value = context.value;
-	  			 fields.push({'name':context.name,'value':context.value,'id':context.atts.id});
-	  		}
-
-  		}
-  	} 
+  	if (Meteor.isClient && context){
+  		renderUploadCropImage.changed();
+  	}
   	return context;
   }
   
@@ -88,36 +79,46 @@ if (Meteor.isClient) {
 		    	var _this = this;
 		    	var _doc = doc;
 
-		    	async.each(fields,function(field,callback){
-			    	saveCropImage(field.value, _this.template, function(idImage){
-			    		_doc.$set[field.name] = idImage;
-			    		callback();
-			    	});
+		    	async.each($('.image-cropper'),function(field,callback){
+		    		
+		    		var schemaKey = $(field).attr('data-schema-key');
+		    		var b64 = plugin.exportToB64($(field)[0]);
+		    		if (b64){
+				    	saveCropImage(b64, function(idImage){
+				    		_doc[schemaKey] = idImage;
+				    		callback();
+				    	});
+		    		}
 		    	}, function(err){
 		    		if (err){
 		    		}
 		    		else{
 			         	_this.result(_doc);
-			         	fields = [];
 		    		}
 		    	});
+
 		    },
 		    update: function(doc){
 		    	var _this = this;
 		    	var _doc = doc;
 
-		    	async.each(fields,function(field,callback){
-			    	updateCropImage(field.value, _this.template, function(idImage){
-			    		_doc.$set[field.name] = idImage;
+		    	async.each($('.image-cropper'),function(field,callback){
+		    		var schemaKey = $(field).attr('data-schema-key');
+		    		var value = $(field).attr('data-value');
+		    		var b64 = plugin.exportToB64($(field)[0]);
+			    	updateCropImage(b64,value, function(idImage){
+			    		_doc.$set[schemaKey] = idImage;
 			    		callback();
 			    	});
+		    		
+
 		    	}, function(err){
 		    		if (err){
 		    		}
 		    		else{
-			         	_this.result(_doc);
-			         	fields = [];
 			         	Session.set('resultServiceGallery',[]);
+			         	delete _doc.$unset
+			         	_this.result(_doc);
 		    		}
 		    	});
 		    }

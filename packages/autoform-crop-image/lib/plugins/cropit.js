@@ -36,3 +36,5 @@
 	 	$(nodeHtml).cropit('imageSrc', url);
 	 }
  }
+
+

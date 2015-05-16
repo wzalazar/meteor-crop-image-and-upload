@@ -5,7 +5,7 @@
 <div>
 	<form class="form-inline">
 	  <input class="tags" type="text" value="" data-role="tagsinput" />
-	  <button type="submit" class="btn btn-primary search-gallery">Search gallery</button>
+	  <button type="submit" class="btn {{#if loadingPhotos}} btn-success {{else}} btn-primary {{/if}}  search-gallery">Search gallery {{#if loadingPhotos}} <i class="fa fa-circle-o-notch fa-spin"></i>{{/if}}</button>
 	</form>
 </div>
 <div class="gallery">
@@ -16,8 +16,5 @@
 	{{/each}}
 </div>
 <div>
-{{#unless images}}
-	<h3 class="center">No hay resultados.</h3>
-{{/unless}}
 </div>
 </template>

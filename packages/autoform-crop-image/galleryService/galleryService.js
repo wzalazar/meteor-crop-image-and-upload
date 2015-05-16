@@ -5,6 +5,10 @@ Template.galleryService.onCreated(function(){
 Template.galleryService.helpers({
 	'images': function(){
 		return Session.get('resultServiceGallery'); 
+	},
+
+	'loadingPhotos': function(){
+		return Session.get('loadingPhotos');
 	}
 })
 

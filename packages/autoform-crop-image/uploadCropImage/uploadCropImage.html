@@ -1,6 +1,6 @@
 <template name="uploadCropImage">
     <div class="form-group">
-        <div id="{{value}}" class="image-cropper">
+        <div id="{{id}}" data-schema-key="{{schemaKey}}" data-value="{{value}}" class="image-cropper">
             <div class="cropit-image-preview cropit-image-loaded" style="width: {{width}}px; height: {{height}}px; background-image: url({{url}}); background-size: {{width}}px {{height}}px; background-position: 0px 0px; background-repeat: no-repeat;"></div>
             <div class="slider-wrapper">
                 <span class="fa fa-file-image-o left"></span>
@@ -10,6 +10,6 @@
         </div>
        
         <input type="hidden" class="origin-file-hidden">
-        <input data-schema-key="{{this.dataSchemaKey}}" value="{{this.value}}" class="image" type="file" />
+        <input data-schema-key="{{schemaKey}}" value="{{this.value}}" class="image" type="file" />
     </div>
 </template>

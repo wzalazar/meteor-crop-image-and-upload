@@ -20,7 +20,6 @@ Package.onUse(function(api) {
   api.use('aldeed:collection2');
   api.use('suxez:jquery-cropit');
   api.use('peerlibrary:async');
-  api.use('manuel:reactivearray');
   api.addFiles([
     'afCropImage.html',
     'afCropImage.js',

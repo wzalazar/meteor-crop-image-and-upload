@@ -32,28 +32,20 @@ handleFileSelect = function(evt) {
   * Save image in Database
   * @param {Object} template - is the current template
   */
-saveCropImage = function(idImage,template,callback){
+saveCropImage = function(b64,callback){
 		var 
-			  originFile= template.$('.origin-file-hidden').data("cfsaf_files"),
-		    b64 = plugin.exportToB64($('#'+idImage));
+			  newFile = new FS.File();
 
-		if (b64){
-			
-			var newFile = new FS.File();
-				newFile.attachData(b64, {type: 'image/png'}, function(error){
-					if(error) throw error;
-				    newFile.name('new.png');
+    newFile.attachData(b64, {type: 'image/png'}, function(error){
+    	if(error) throw error;
+        newFile.name('new.png');
 
-				    Images.insert(newFile, function(err, result){
-               if(!err){
-                  callback(result._id);
-               } 
-            });
-				});
-		}
-    else{
-      callback(undefined);
-    }
+        Images.insert(newFile, function(err, result){
+           if(!err){
+              callback(result._id);
+           } 
+        });
+    });
 
  };
 
@@ -61,23 +53,13 @@ saveCropImage = function(idImage,template,callback){
   * Save image in Database
   * @param {Object} template - is the current template
   */
-updateCropImage = function(idImage,template,callback){
-
-    var 
-      originFile= template.$('.origin-file-hidden').data("cfsaf_files"),
-      b64 = plugin.exportToB64($('#'+idImage));
-
-    if (idImage){
-        if (b64){
-            Images.remove({'_id':idImage});
-            saveCropImage(idImage,template,callback);
-        }
-        else{
-          callback(idImage);
-        }
+updateCropImage = function(b64,value,callback){
+    if (value){
+        Images.remove({'_id':value});
+        saveCropImage(b64,callback);
     }
     else{
-      saveCropImage(idImage,template,callback);
+      saveCropImage(b64,callback);
     }
   
  };
@@ -129,7 +111,7 @@ justifiedGallery = function(){
           cssAnimation: false,
           imagesAnimationDuration: 300
         }).on('jg.complete', function (e) {
-          // this callback runs after the gallery layout is created
+            Session.set('loadingPhotos',false);
         }).on('jg.resize', function (e) {
           // this callback runs after the gallery is resized
         }).on('jq.rowflush', function (e) {
